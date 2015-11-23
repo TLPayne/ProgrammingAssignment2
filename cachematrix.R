@@ -9,6 +9,11 @@ makeCacheMatrix <- function(x = matrix()) {
     x <<- y
     m <<- NULL
   }
+  cols<-ncol(x)
+  rows<-nrow(x)
+  if (cols!=rows){
+    stop("Matrix is not square. Please enter a square matrix.") ##Returns message if matrix not square
+  }
   get <- function() x
   setmatrix <- function(matrix) m <<- matrix
   getmatrix <- function() m
@@ -24,7 +29,7 @@ makeCacheMatrix <- function(x = matrix()) {
 ## and sets it as the cached value. This function assumes that the matrix is always invertible.
 cacheSolve <- function(x, ...) {
   m <- x$getmatrix()
-  if(!is.null(m)) {
+    if(!is.null(m)) {
     message("getting cached data")
     return(m) ## Returns a matrix that is the inverse of 'x'
   }
